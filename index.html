@@ -36,14 +36,14 @@ button{font:inherit;color:inherit;letter-spacing:inherit}
 /* ── 상단 바 ── */
 .bar{position:sticky;top:0;z-index:20;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
   background:rgba(0,0,0,.66);border-bottom:1px solid var(--sep)}
-.bar-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar-in{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{font-size:17px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;white-space:nowrap;background:none;border:0;padding:0;cursor:pointer}
 .logo svg{width:20px;height:20px}
 .seg{display:inline-flex;background:var(--surface);border-radius:10px;padding:2px;gap:2px;position:relative}
 .seg button{border:0;background:none;padding:6px 16px;border-radius:8px;font-size:14.5px;font-weight:600;color:var(--text-2);cursor:pointer;transition:background .25s var(--ease),color .25s}
 .seg button.on{background:var(--surface-3);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.35)}
 
-main{max-width:1080px;margin:0 auto;padding:0 20px 40px}
+main{max-width:1200px;margin:0 auto;padding:0 20px 40px}
 section.view{animation:fade .5s var(--ease)}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
@@ -151,28 +151,32 @@ h1{font-size:clamp(40px,6vw,64px);line-height:1.08;letter-spacing:-.035em;font-w
 /* ── 시트 ── */
 .scrim{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s}
 .scrim.on{opacity:1}
-.sheet{position:fixed;z-index:41;left:50%;top:50%;width:min(860px,calc(100% - 40px));max-height:min(86vh,760px);overflow:auto;
+.sheet{position:fixed;z-index:41;left:50%;top:50%;width:min(1040px,calc(100% - 48px));max-height:min(90vh,920px);overflow:hidden;display:flex;flex-direction:column;
   background:var(--surface);border-radius:28px;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06);
-  transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .4s var(--ease),opacity .3s;padding:32px}
+  transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .4s var(--ease),opacity .3s;padding:0}
+#sheetBody{flex:1;min-height:0;overflow:auto;padding:40px 44px 32px;scrollbar-width:thin;scrollbar-color:#48484a transparent}
+.sh-foot{flex:none;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px 20px;border-top:1px solid var(--sep);background:#1c1c1e}
+.sh-foot .btn{min-height:46px;font-size:16px;padding:0 22px}
+.sh-foot .btn:first-child{justify-self:start}
+.sh-foot .btn:last-child{justify-self:end}
+.sh-foot .cnt{font-size:15px;font-weight:600;color:var(--text-2);font-variant-numeric:tabular-nums}
 .sheet.on{transform:translate(-50%,-50%);opacity:1}
-.sheet .x{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:0;background:var(--surface-2);color:var(--text-2);cursor:pointer;display:grid;place-items:center;z-index:2}
+.sheet .x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:0;background:var(--surface-2);color:var(--text-2);cursor:pointer;display:grid;place-items:center;z-index:2}
 .sheet .x svg{width:14px;height:14px}
 .grab{display:none}
-.sh-in{display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:start}
-.sh-card{--cw:260px;width:260px;aspect-ratio:2/3;border-radius:14px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.sh-in{display:grid;grid-template-columns:360px 1fr;gap:44px;align-items:start}
+.sh-card{--cw:360px;width:360px;aspect-ratio:2/3;border-radius:14px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5)}
 .sh-pos{font-size:14px;font-weight:700;color:var(--gold);letter-spacing:.02em;margin:4px 0 6px}
-.sh-in h2{font-size:32px;line-height:1.2;font-weight:800;letter-spacing:-.03em;margin:0}
+.sh-in h2{font-size:38px;line-height:1.2;font-weight:800;letter-spacing:-.03em;margin:0}
 .sh-en{font-size:15px;color:var(--text-3);margin:4px 0 14px}
 .badge{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:700;margin-bottom:14px}
 .badge.u{background:rgba(48,209,88,.15);color:var(--up)} .badge.r{background:rgba(255,107,107,.15);color:var(--rev)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
 .chip{font-size:14.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(226,184,102,.14);color:var(--gold-hi)}
-.mean{font-size:19px;line-height:1.7;margin:0 0 16px;letter-spacing:-.015em}
+.mean{font-size:20px;line-height:1.7;margin:0 0 16px;letter-spacing:-.015em}
 .ctx{font-size:15.5px;color:var(--text-2);margin:0 0 18px;line-height:1.6}
 .alt{background:var(--surface-2);border-radius:var(--r-md);padding:14px 16px;font-size:15.5px;line-height:1.6;color:var(--text-2)}
 .alt b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
-.sh-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
-.sh-nav .btn{min-height:44px;font-size:15.5px;padding:0 18px}
 
 /* ── 사전 ── */
 .filters{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 18px;scrollbar-width:none;justify-content:center}
@@ -205,7 +209,7 @@ h1{font-size:clamp(40px,6vw,64px);line-height:1.08;letter-spacing:-.035em;font-w
 .sj .warn{color:var(--rev);font-size:15px}
 .sj b{font-weight:700}
 
-footer{max-width:1080px;margin:0 auto;padding:32px 20px 48px;border-top:1px solid var(--sep);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--text-3)}
+footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px solid var(--sep);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--text-3)}
 
 /* ── 태블릿 ── */
 @media (max-width:900px){
@@ -215,8 +219,9 @@ footer{max-width:1080px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
   .fan3 .fc{width:150px}
   .fan3 .fc:nth-child(1){transform:translate(-50%,-50%) translateX(-95px) rotate(-12deg) scale(.9)}
   .fan3 .fc:nth-child(2){transform:translate(-50%,-50%) translateX(95px) rotate(12deg) scale(.9)}
-  .sh-in{grid-template-columns:200px 1fr;gap:24px}
-  .sh-card{--cw:200px;width:200px}
+  .sh-in{grid-template-columns:260px 1fr;gap:28px}
+  .sh-card{--cw:260px;width:260px}
+  #sheetBody{padding:36px 28px 28px}
 }
 /* ── 모바일 ── */
 @media (max-width:640px){
@@ -238,11 +243,14 @@ footer{max-width:1080px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
   .tile .mini i{width:16px}
   .stage-head{padding:36px 0 16px}
   .spread{gap:22px 10px}
-  .sheet{left:0;right:0;top:auto;bottom:0;width:100%;max-height:92vh;border-radius:24px 24px 0 0;transform:translateY(100%);opacity:1;padding:12px 20px calc(24px + env(safe-area-inset-bottom))}
+  .sheet{left:0;right:0;top:auto;bottom:0;width:100%;max-height:94vh;border-radius:24px 24px 0 0;transform:translateY(100%);opacity:1;padding:12px 0 0}
+  #sheetBody{padding:0 20px 20px}
+  .sh-foot{padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+  .sh-foot .btn{padding:0 14px;font-size:15px}
   .sheet.on{transform:none}
   .grab{display:block;width:40px;height:5px;border-radius:3px;background:var(--surface-3);margin:0 auto 14px}
   .sh-in{grid-template-columns:1fr;gap:18px}
-  .sh-card{--cw:180px;width:180px;margin:0 auto}
+  .sh-card{--cw:min(62vw,240px);width:min(62vw,240px);margin:0 auto}
   .sh-in h2{font-size:28px}
   .mean{font-size:18px}
   .grid{grid-template-columns:repeat(3,1fr);gap:18px 10px}
@@ -253,8 +261,8 @@ footer{max-width:1080px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 }
 
 
-.ghost{position:fixed;z-index:35;border-radius:6px;overflow:hidden;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.ghost img{width:100%;height:100%;object-fit:cover;display:block}
+.flycard{position:fixed;z-index:35;border-radius:6px;overflow:hidden;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+.flycard img{width:100%;height:100%;object-fit:cover;display:block}
 .ring{position:fixed;z-index:29;border:2px solid rgba(244,216,153,.9);border-radius:14px;pointer-events:none;box-shadow:0 0 30px rgba(226,184,102,.6)}
 .spark{position:fixed;z-index:30;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#fffbe8 0%,#f4d899 45%,rgba(226,184,102,0) 72%)}
 .c3.flip .sd.fr{box-shadow:0 0 0 1px rgba(226,184,102,.55),0 0 46px rgba(226,184,102,.28),0 20px 40px rgba(0,0,0,.55)}
@@ -358,6 +366,7 @@ footer{max-width:1080px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
   <div class="grab"></div>
   <button class="x" id="sheetX" aria-label="닫기"><svg viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg></button>
   <div id="sheetBody"></div>
+  <div class="sh-foot hidden" id="sheetFoot"></div>
 </div>
 
 <div class="lbx hidden" id="lb" role="dialog" aria-label="카드 크게 보기"><div class="lb-card tilt" id="lbCard"></div><p class="lb-cap"><span id="lbCap"></span><small>아무 곳이나 누르면 닫힙니다</small></p></div>
@@ -550,7 +559,7 @@ function layoutDeck(){
 addEventListener('resize',()=>{if(!$('vPick').classList.contains('hidden'))layoutDeck();});
 function flyTo(fromEl,toEl,dur=520){
   const a=fromEl.getBoundingClientRect(),b=toEl.getBoundingClientRect();
-  const g=document.createElement('div');g.className='ghost';g.innerHTML=fromEl.innerHTML;
+  const g=document.createElement('div');g.className='flycard';g.innerHTML=fromEl.innerHTML;
   Object.assign(g.style,{left:a.left+'px',top:a.top+'px',width:a.width+'px',height:a.height+'px'});
   document.body.appendChild(g);
   const an=g.animate([{transform:'none'},{transform:`translate(${b.left-a.left}px,${b.top-a.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration:reduce?1:dur,easing:'cubic-bezier(.5,0,.2,1)',fill:'forwards'});
@@ -669,7 +678,6 @@ function summaryHTML(){
 let SH=null;
 function sheetHTML(o){
   const c=o.card,rev=o.rev,kws=rev?c.rkw:c.kw;
-  const nav=o.pos?`<div class="sh-nav"><button class="btn ghost" id="shPrev"${o.i===0?' disabled':''}>‹ 이전 카드</button><button class="btn ghost" id="shNext"${o.i===S.picks.length-1?' disabled':''}>다음 카드 ›</button></div>`:'';
   return `<div class="sh-in"><div class="sh-card tilt" id="shCard" title="크게 보기">${faceHTML(c,rev)}<div class="shine"></div><span class="zoomhint">크게 보기</span></div><div>
     ${o.pos?`<p class="sh-pos">${o.i+1}번 자리 · ${o.pos.l} · ${o.pos.d}</p>`:`<p class="sh-pos">${c.major?'메이저 아르카나':c.suit.ko+' · '+c.suit.el+'의 기운'}</p>`}
     <h2>${c.ko}</h2><p class="sh-en">${c.en}</p>
@@ -678,7 +686,7 @@ function sheetHTML(o){
     <p class="mean">${rev?c.rev:c.up}</p>
     <p class="ctx">${typeNote(c)}</p>
     <div class="alt"><b>${rev?'정방향':'역방향'}으로 나오면</b>${(rev?c.kw:c.rkw).join(' · ')}<br>${rev?c.up:c.rev}</div>
-    ${nav}</div></div>`;
+    </div></div>`;
 }
 function bindTilt(el){
   if(reduce||!matchMedia('(hover:hover)').matches)return;
@@ -699,11 +707,18 @@ function openSheet(o){
   card.style.setProperty('--cw',getComputedStyle(card).width);
   bindTilt(card);
   card.onclick=()=>openLightbox(o,card);
-  if(o.pos){$('shPrev').onclick=()=>step(-1);$('shNext').onclick=()=>step(1);}
+  const ft=$('sheetFoot');
+  if(o.pos){
+    const last=S.picks.length-1;
+    ft.innerHTML=`<button class="btn ghost" id="shPrev"${o.i===0?' disabled':''}>‹ 이전 카드</button><span class="cnt">${o.i+1} / ${S.picks.length}</span><button class="btn${o.i===last?' ghost':''}" id="shNext">${o.i===last?'종합 해설 보기':'다음 카드 ›'}</button>`;
+    ft.classList.remove('hidden');
+    $('shPrev').onclick=()=>step(-1);
+    $('shNext').onclick=()=>{if(o.i===last){closeSheet();setTimeout(()=>{const b=$('summary');if(!b.classList.contains('hidden'))b.scrollIntoView({behavior:'smooth',block:'start'});},400);}else step(1);};
+  }else{ft.innerHTML='';ft.classList.add('hidden');}
   const wasOpen=sh.classList.contains('on');
   sh.classList.remove('hidden');sc.classList.remove('hidden');document.body.classList.add('lock');
   requestAnimationFrame(()=>{sh.classList.add('on');sc.classList.add('on');if(!wasOpen)requestAnimationFrame(()=>zoomFrom(card,o.from));});
-  sh.scrollTop=0;
+  $('sheetBody').scrollTop=0;
 }
 async function step(d){
   const n=SH.i+d;if(n<0||n>=S.picks.length)return;
@@ -719,7 +734,7 @@ function closeSheet(){
 $('scrim').onclick=closeSheet;$('sheetX').onclick=closeSheet;
 /* 모바일: 시트 끌어내려 닫기 */
 (function(){let y0=null,dy=0;const sh=$('sheet');
-  sh.addEventListener('touchstart',e=>{if(sh.scrollTop<=0&&innerWidth<=640){y0=e.touches[0].clientY;dy=0;}},{passive:true});
+  sh.addEventListener('touchstart',e=>{if($('sheetBody').scrollTop<=0&&innerWidth<=640){y0=e.touches[0].clientY;dy=0;}},{passive:true});
   sh.addEventListener('touchmove',e=>{if(y0===null)return;dy=Math.max(0,e.touches[0].clientY-y0);if(dy>0){sh.style.transition='none';sh.style.transform=`translateY(${dy}px)`;}},{passive:true});
   sh.addEventListener('touchend',()=>{if(y0===null)return;sh.style.transition='';if(dy>110)closeSheet();else sh.style.transform='';y0=null;});
 })();
