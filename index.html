@@ -379,6 +379,18 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 .mini-p small.warn2{margin-top:6px;line-height:1.45}
 .rels li.w .rk{background:rgba(255,179,71,.14);color:#ffc37a}
 @media (max-width:640px){.pl{padding:14px 2px!important}.pl small{font-size:12.5px}.pl .rd{font-size:12.5px}}
+.labrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 8px}
+.labrow>span{font-size:15px;font-weight:600;color:var(--text-2)}
+.labrow>span small{font-weight:500;color:var(--text-3);font-size:13.5px}
+.lunar-res{text-align:left!important;margin:10px 2px 0!important}
+.dlist{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;margin:4px 0 16px}
+.dcell{background:var(--surface-2);border-radius:12px;padding:10px 2px;text-align:center;border:2px solid transparent}
+.dcell.now{border-color:var(--gold);background:rgba(226,184,102,.1)}
+.dcell small{display:block;font-size:12.5px;color:var(--text-3)}
+.dcell .hz2{display:block;font-family:var(--serif);font-size:19px;color:var(--gold-hi);line-height:1.4;writing-mode:horizontal-tb}
+.dcell span{display:block;font-size:11.5px;color:var(--text-3)}
+.dcell em{display:block;font-style:normal;font-size:12px;font-weight:600;color:var(--text-2);margin-top:2px}
+@media (max-width:760px){.dlist{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -443,29 +455,28 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 
   <!-- 사주 -->
   <section id="vSaju" class="view hidden">
-    <div class="stage-head"><p class="eyebrow">SAJU</p><h2>태어난 날로 읽는 나.</h2><p>양력 생년월일을 넣으면 일주로 타고난 성향과 2026년 흐름을 풀어 드립니다.</p></div>
+    <div class="stage-head"><p class="eyebrow">SAJU</p><h2>태어난 날로 읽는 나.</h2><p>생년월일(양력이나 음력)을 넣으면 사주 여덟 글자와 대운, 2026년 흐름을 풀어 드립니다.</p></div>
     <div class="group" style="max-width:620px;margin:0 auto 28px">
-      <div class="field"><span><label for="bDate">생년월일 (양력)</label></span>
-        <div class="inrow"><input class="input" type="date" id="bDate" min="1900-01-01" max="2026-12-31"><button type="button" class="btn ghost lunar-btn" id="lunarBtn" aria-expanded="false" aria-controls="lunarBox">음력 변환</button></div>
+      <div class="field"><div class="labrow"><span>생년월일</span><div class="seg2" id="calSeg" role="group" aria-label="달력 종류"><button type="button" class="on" data-c="s">양력</button><button type="button" data-c="l">음력</button></div></div>
+        <input class="input" type="date" id="bDate" min="1900-01-01" max="2026-12-31" aria-label="양력 생년월일">
         <div class="lunar hidden" id="lunarBox">
-          <p class="lunar-t">음력 생일을 넣으면 양력으로 바꿔 위 칸에 넣어 드립니다.</p>
           <div class="lunar-row">
             <label><span>년</span><input class="input" type="number" id="lY" inputmode="numeric" min="1900" max="2050" placeholder="1990"></label>
             <label><span>월</span><select class="input" id="lM"></select></label>
             <label><span>일</span><select class="input" id="lD"></select></label>
           </div>
           <div class="row"><div class="t">윤달이에요<small>음력 생일이 윤달이면 켜 주세요.</small></div><label class="sw"><input type="checkbox" id="lLeap"><i></i></label></div>
-          <button type="button" class="btn wide" id="lunarGo">양력으로 바꾸기</button>
-          <p class="lunar-res" id="lunarRes" aria-live="polite"></p>
+          <p class="lunar-res" id="lunarRes" aria-live="polite">음력 날짜를 넣으면 양력으로 바로 바꿔 드립니다(한국천문연구원 기준).</p>
         </div>
       </div>
+      <div class="field"><div class="labrow"><span>성별<small> · 대운 계산에 필요해요</small></span><div class="seg2" id="sexSeg" role="group" aria-label="성별"><button type="button" data-s="m">남자</button><button type="button" data-s="f">여자</button></div></div></div>
       <label class="field"><span>태어난 시각</span><input class="input" type="time" id="bTime"></label>
       <div class="row"><div class="t">태어난 시각을 몰라요<small>시주 없이 일주와 띠만 풀이합니다.</small></div><label class="sw"><input type="checkbox" id="noTime"><i></i></label></div>
       <div class="row"><div class="t">서머타임 기간에 태어났어요<small>1948~1951년, 1955~1960년, 1987~1988년 여름철 출생이면 켜 주세요.</small></div><label class="sw"><input type="checkbox" id="dst"><i></i></label></div>
       <div class="cta"><button class="btn wide" id="goSaju">풀이 보기</button></div>
     </div>
     <div id="sajuOut" style="max-width:760px;margin:0 auto"></div>
-    <p class="note" style="max-width:760px;margin:24px auto 0">전통 사주명리학 이론으로 정리한 풀이입니다. 일주는 태어난 날로 계산합니다. 월주와 띠는 절기 시각(천문 계산, 한국천문연구원 자료와 1분 이내 일치)으로 나눕니다. 시주는 한반도 경도에 맞춰 출생 시각을 보정한 뒤 정합니다. 음력 생일은 「음력 변환」 버튼으로 바꿀 수 있습니다(한국천문연구원 기준, 1900~2050년). 재미와 참고용이며, 건강·돈·법률 관련 결정은 전문가와 상의하세요.</p>
+    <p class="note" style="max-width:760px;margin:24px auto 0">전통 사주명리학 이론으로 정리한 풀이입니다. 일주는 태어난 날로 계산합니다. 월주와 띠는 절기 시각(천문 계산, 한국천문연구원 자료와 1분 이내 일치)으로 나눕니다. 시주는 한반도 경도에 맞춰 출생 시각을 보정한 뒤 정합니다. 음력 생일은 생년월일 칸에서 「음력」을 고르면 양력으로 자동 변환됩니다(한국천문연구원 기준, 1900~2050년). 재미와 참고용이며, 건강·돈·법률 관련 결정은 전문가와 상의하세요.</p>
   </section>
   <!-- 궁합 -->
   <section id="vGung" class="view hidden">
@@ -878,6 +889,8 @@ document.addEventListener('keydown',e=>{
 /* 업데이트 소식 */
 const UPDATES=[
  {d:'2026-11-12',items:[
+  ['대운을 넣었습니다','성별을 고르면 10년 단위 대운 10개와 지금 대운의 풀이가 나옵니다. 계산 과정은 근거 칸에 그대로 보여 줍니다.'],
+  ['음력 생일을 바로 넣을 수 있습니다','생년월일 칸에서 「음력」을 고르면 입력하는 즉시 양력으로 바뀝니다.'],
   ['사주 여덟 글자를 모두 채웠습니다','월주를 넣었고, 띠도 2월 4일이 아닌 그해 입춘 시각으로 나눕니다. 절기 시각은 한국천문연구원 자료와 1분 이내로 맞춰 봤습니다.'],
   ['궁합에 파(破)를 넣었습니다','출처를 확인해 다시 넣었고, 가장 약한 관계라 「약한 주의」로 따로 표시합니다.'],
   ['궁합 탭을 열었습니다','두 사람의 일간·일지·띠 관계와 오행 보완을 근거와 함께 봅니다. 판정에 쓴 규칙표도 공개했습니다.'],
@@ -891,7 +904,7 @@ const UPDATES=[
   ['「다음 카드」 버튼 오류를 고쳤습니다','해설 창의 버튼이 눌리지 않던 문제입니다. 탭을 바꾸면 열린 창도 닫힙니다.'],
   ['별자리 운세실을 처음 공개했습니다','타로(1장 · 3장 · 10장 배열), 카드 사전 78장, 사주 풀이를 담았습니다.']]}
 ];
-const SOON=[['대운','10년 단위 대운을 보여 줄 예정입니다.'],['내 사주 오행 분포','사주 화면에서도 여덟 글자의 나무 · 불 · 흙 · 쇠 · 물 비율을 그래프로 보여 줄 예정입니다.']];
+const SOON=[['내 사주 오행 분포','사주 화면에서도 여덟 글자의 나무 · 불 · 흙 · 쇠 · 물 비율을 그래프로 보여 줄 예정입니다.']];
 function fmtD(d){const [y,m,dd]=d.split('-').map(Number);return `${y}년 ${m}월 ${dd}일`;}
 function newsHTML(){
   return `<div class="upd"><h2>업데이트 소식</h2><p class="lead2">별자리 운세실이 바뀐 내용입니다.</p>
@@ -1027,9 +1040,19 @@ function calcSaju(ds,ts,noTime,dst){
   else{const near=[cur,next].filter(Boolean).map(x=>({x,dm:Math.abs(inst-x.t)/60000})).sort((a,b)=>a.dm-b.dm)[0];if(near&&near.dm<30)edge=`출생 시각이 ${near.x.n} 절입 시각(${fmtJeol(near.x.t)})과 ${Math.round(near.dm)}분 차이라, 시각이 조금만 달라도 월주${near.x.n==='입춘'?'와 띠':''}가 바뀝니다.`;}
   let hg=null,hb=null;
   if(mins!==null){hb=Math.floor((mins+60)/120)%12;hg=((dg%5)*2+hb)%10;}
-  return {y,m,d,dg,db,yg,yb,mg,mb,hg,hb,mins,corr,jeol:cur,nextJeol:next,edge,noTime};
+  return {y,m,d,dg,db,yg,yb,mg,mb,hg,hb,mins,corr,jeol:cur,nextJeol:next,edge,noTime,inst};
 }
 const pad2=n=>String(n).padStart(2,'0');
+/* 대운: 양남음녀 순행(다음 절기까지), 음남양녀 역행(지난 절기까지). 그 일수 ÷ 3 = 대운수(3일=1년, 나머지 1은 버리고 2는 올림). */
+function idx60(g,b){for(let i=0;i<60;i++)if(i%10===g&&i%12===b)return i;return 0;}
+function calcDaeun(r,sex){
+  const yang=r.yg%2===0,fwd=(sex==='m')===yang;
+  const days=fwd?(r.nextJeol.t-r.inst)/864e5:(r.inst-r.jeol.t)/864e5;
+  let n=Math.round(days/3);if(n<1)n=1;if(n>10)n=10;
+  const mi=idx60(r.mg,r.mb),list=[];
+  for(let k=1;k<=10;k++){const i=((mi+(fwd?k:-k))%60+60)%60;const age=n+(k-1)*10;list.push({g:i%10,b:i%12,age,year:r.y+age});}
+  return {fwd,days,n,list,yang};
+}
 function pillar(label,g,b,me){
   if(g===null)return `<div class="pl"><small>${label}</small><div class="hz">··</div><div class="rd">시각 모름</div></div>`;
   return `<div class="pl${me?' me':''}"><small>${label}</small><div class="hz">${GAN[g]}${JI[b]}</div><div class="rd">${GAN_KO[g]}${JI_KO[b]} · ${EL_KO[GAN_EL[g]]}/${EL_KO[JI_EL[b]]}</div></div>`;
@@ -1039,7 +1062,7 @@ function basis(t){return `<p class="basis"><b>근거</b>${t}</p>`;}
 function elYY(g){return `${g%2===0?'양':'음'}의 ${EL_KO[GAN_EL[g]]}(${EL_ZH[GAN_EL[g]]})`;}
 function renderSaju(){
   const ds=$('bDate').value;
-  if(!ds){$('sajuOut').innerHTML='<p class="empty">생년월일을 넣어 주세요.</p>';return;}
+  if(!ds){$('sajuOut').innerHTML=`<p class="empty err">${CAL==='l'?'음력 생년월일을 바르게 넣어 주세요.':'생년월일을 넣어 주세요.'}</p>`;return;}
   const noTime=$('noTime').checked||!$('bTime').value;
   const r=calcSaju(ds,$('bTime').value,noTime,$('dst').checked);
   const g=r.dg,b=r.db,gi=GAN_INFO[g],key=GAN[g]+JI[b];
@@ -1074,6 +1097,18 @@ function renderSaju(){
     <p>일간이 일지에서 <b>${STAGES[st]}</b> 단계에 있습니다. ${POWER_TXT[STAGE_POWER[st]]}</p>
     ${basis(`일지 ${JI[b]}의 지장간 정기는 ${GAN[hid]}이고, ${GAN[g]}에서 보면 ${jo(GAN[hid],'은','는')} ${ss}(${si.def})입니다. 12운성표에서 ${GAN[g]} 일간이 ${JI[b]}에 있으면 ${STAGES[st]}입니다.`)}</div>`;
 
+  // 대운
+  if(!SEX)h+=`<div class="sj"><h3>${tag('f')}대운<small>10년 단위로 바뀌는 큰 흐름</small></h3><p class="dim">성별을 고르면 대운이 나옵니다. 대운의 방향(순행·역행)이 성별에 따라 달라지기 때문입니다.</p></div>`;
+  else{
+    const du=calcDaeun(r,SEX),now=2026,curI=du.list.findIndex(x=>x.year<=now&&now<x.year+10);
+    const cd=curI>=0?du.list[curI]:null;
+    h+=`<div class="sj"><h3>${tag('f')}대운<small>대운수 ${du.n} · ${du.fwd?'순행':'역행'} · 10년마다 바뀝니다</small></h3>
+      <div class="dlist">${du.list.map((x,i)=>`<div class="dcell${i===curI?' now':''}"><small>${x.age}세</small><b class="hz2">${GAN[x.g]}${JI[x.b]}</b><span>${x.year}~</span><em>${sipsin(g,x.g)}</em></div>`).join('')}</div>
+      ${cd?`<p>2026년은 <b>${GAN[cd.g]}${JI[cd.b]} 대운</b>(${cd.year}~${cd.year+9}년) 안에 있습니다. 대운 천간 ${jo(GAN[cd.g],'은','는')} 나에게 <b>${sipsin(g,cd.g)}</b>, 대운 지지 ${JI[cd.b]}(속 글자 ${GAN[JI_MAIN[cd.b]]})는 <b>${sipsin(g,JI_MAIN[cd.b])}</b>입니다. ${YEAR_SS[sipsin(g,cd.g)].replace('의 해로 봅니다.','의 시기로 봅니다.')}</p>
+      <p>12운성으로는 일간이 대운 지지에서 <b>${STAGES[stage(g,cd.b)]}</b> 단계라, ${STAGE_TXT[stage(g,cd.b)]}이 10년 동안 흐릅니다.</p>`:`<p>2026년은 아직 첫 대운(${du.list[0].year}년) 전으로, 월주 ${GAN[r.mg]}${JI[r.mb]}의 기운 안에 있습니다.</p>`}
+      ${basis(`${GAN[r.yg]}${JI[r.yb]}년은 ${du.yang?'양':'음'}의 해이고 ${SEX==='m'?'남자':'여자'}라 <b>${du.fwd?'순행':'역행'}</b>입니다(양남음녀 순행, 음남양녀 역행). 태어난 순간부터 ${du.fwd?'다음':'지난'} 절기(${du.fwd?r.nextJeol.n:r.jeol.n} ${fmtJeol(du.fwd?r.nextJeol.t:r.jeol.t)})까지 ${du.days.toFixed(1)}일, 이를 3으로 나눠 대운수 ${du.n}입니다(3일 = 1년). 대운은 월주 ${GAN[r.mg]}${JI[r.mb]}에서 ${du.fwd?'다음':'앞'} 간지로 한 칸씩 나아갑니다. 나이는 만 나이 기준이며, 반올림 방식에 따라 학파마다 1년 차이가 날 수 있습니다.`)}</div>`;
+  }
+
   // 4. 2026
   const sr=STEM_REL[g],br=BRANCH_REL[b];
   h+=`<div class="sj"><h3>${tag('i')}2026년 흐름<small>丙午 병오년</small></h3>
@@ -1094,14 +1129,20 @@ function renderSaju(){
     <ol><li><b>계산</b> · 생년월일과 시각으로 년주·월주·일주·시주 여덟 글자를 구합니다. 일주는 한국천문연구원 기준 달력과, 월주의 절기 시각은 한국천문연구원 절기 자료와 대조해 검증했습니다.</li>
     <li><b>이론</b> · 글자 사이의 관계를 명리학 기초 이론(오행 상생·상극, 십신, 12운성, 합·충·형·해·파)의 정의로 판단합니다.</li>
     <li><b>문장</b> · 그 정의를 쉬운 말로 풀어 씁니다. 고전 원문 인용이 아니며, 같은 사주라도 해석하는 사람마다 풀이가 다릅니다.</li></ol>
-    <p class="dim">아직 대운은 넣지 않았습니다. 사주 풀이는 과학적으로 검증된 예측이 아니며, 재미와 자기 성찰을 위한 참고로 봐 주세요.</p></div>`;
+    <p class="dim">사주 풀이는 과학적으로 검증된 예측이 아니며, 재미와 자기 성찰을 위한 참고로 봐 주세요.</p></div>`;
   $('sajuOut').innerHTML=h;
 }
 $('goSaju').onclick=renderSaju;
 /* 음력 → 양력 */
 $('lM').innerHTML=Array.from({length:12},(_,i)=>`<option value="${i+1}">${i+1}월</option>`).join('');
 $('lD').innerHTML=Array.from({length:30},(_,i)=>`<option value="${i+1}">${i+1}일</option>`).join('');
-$('lunarBtn').onclick=()=>{const b=$('lunarBox'),open=b.classList.toggle('hidden')===false;$('lunarBtn').setAttribute('aria-expanded',open);if(open)$('lY').focus();};
+let CAL='s',SEX=null;
+$('calSeg').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{
+  CAL=btn.dataset.c;$('calSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn));
+  $('bDate').classList.toggle('hidden',CAL==='l');$('lunarBox').classList.toggle('hidden',CAL!=='l');
+  if(CAL==='l'){$('bDate').value='';lunarAuto();$('lY').focus();}
+});
+$('sexSeg').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{SEX=btn.dataset.s;$('sexSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn));});
 function lunarToSolar(y,m,d,leap){
   if(typeof KoreanLunarCalendar==='undefined')return null;
   const c=new KoreanLunarCalendar();
@@ -1109,18 +1150,18 @@ function lunarToSolar(y,m,d,leap){
   const s=c.getSolarCalendar();
   return `${s.year}-${String(s.month).padStart(2,'0')}-${String(s.day).padStart(2,'0')}`;
 }
-$('lunarGo').onclick=()=>{
+function lunarAuto(){ // 음력 칸이 바뀔 때마다 자동으로 양력 변환
   const y=+$('lY').value,m=+$('lM').value,d=+$('lD').value,leap=$('lLeap').checked,res=$('lunarRes');
-  res.className='lunar-res';
-  if(!y||y<1900||y>2050){res.classList.add('err');res.textContent='1900년부터 2050년 사이의 연도를 넣어 주세요.';return;}
+  res.className='lunar-res';$('bDate').value='';
+  if(!$('lY').value){res.textContent='음력 날짜를 넣으면 양력으로 바로 바꿔 드립니다(한국천문연구원 기준).';return;}
+  if(y<1900||y>2050){res.classList.add('err');res.textContent='1900년부터 2050년 사이의 연도를 넣어 주세요.';return;}
   const out=lunarToSolar(y,m,d,leap);
   if(!out){res.classList.add('err');res.textContent=leap?`${y}년에는 윤${m}월이 없거나, 없는 날짜입니다.`:`${y}년 음력 ${m}월에는 ${d}일이 없습니다.`;return;}
   if(out>$('bDate').max){res.classList.add('err');res.textContent=`양력 ${out}은 입력할 수 있는 범위를 넘습니다.`;return;}
-  $('bDate').value=out;
-  const [sy,sm,sd]=out.split('-').map(Number);
-  res.classList.add('ok');res.textContent=`음력 ${y}년 ${leap?'윤':''}${m}월 ${d}일은 양력 ${sy}년 ${sm}월 ${sd}일입니다.`;
-  const bd=$('bDate');bd.classList.remove('flash');void bd.offsetWidth;bd.classList.add('flash');
-};
+  $('bDate').value=out;const [sy,sm,sd]=out.split('-').map(Number);
+  res.classList.add('ok');res.textContent=`→ 양력 ${sy}년 ${sm}월 ${sd}일`;
+}
+['lY','lM','lD','lLeap'].forEach(id=>{$(id).addEventListener('input',lunarAuto);$(id).addEventListener('change',lunarAuto);});
 $('noTime').onchange=()=>{$('bTime').disabled=$('noTime').checked;};
 
 
