@@ -373,6 +373,12 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 .rules .facts{margin-top:10px;font-size:15px}
 .empty.err{color:var(--rev)}
 @media (max-width:640px){.gforms{grid-template-columns:minmax(0,1fr)}.ymd{gap:8px}.ymd .input{padding:12px 10px;font-size:16px}select.input{padding-right:26px;background-position:calc(100% - 14px) 50%,calc(100% - 9px) 50%}.gpair{grid-template-columns:1fr;gap:4px}.amp{text-align:center}.seg button{font-size:14px;padding:7px 2px}}
+.pillars{grid-template-columns:repeat(4,1fr)!important}
+.pl .hz{font-size:clamp(28px,5.4vw,46px)!important}
+.warn2{color:#ffb4a8!important}
+.mini-p small.warn2{margin-top:6px;line-height:1.45}
+.rels li.w .rk{background:rgba(255,179,71,.14);color:#ffc37a}
+@media (max-width:640px){.pl{padding:14px 2px!important}.pl small{font-size:12.5px}.pl .rd{font-size:12.5px}}
 </style>
 </head>
 <body>
@@ -459,7 +465,7 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
       <div class="cta"><button class="btn wide" id="goSaju">풀이 보기</button></div>
     </div>
     <div id="sajuOut" style="max-width:760px;margin:0 auto"></div>
-    <p class="note" style="max-width:760px;margin:24px auto 0">전통 사주명리학 이론으로 정리한 풀이입니다. 일주는 태어난 날로 계산합니다. 시주는 한반도 경도에 맞춰 출생 시각을 보정한 뒤 정합니다. 월주는 절기 계산이 필요해 아직 넣지 않았습니다. 음력 생일은 「음력 변환」 버튼으로 바꿀 수 있습니다(한국천문연구원 기준, 1900~2050년). 재미와 참고용이며, 건강·돈·법률 관련 결정은 전문가와 상의하세요.</p>
+    <p class="note" style="max-width:760px;margin:24px auto 0">전통 사주명리학 이론으로 정리한 풀이입니다. 일주는 태어난 날로 계산합니다. 월주와 띠는 절기 시각(천문 계산, 한국천문연구원 자료와 1분 이내 일치)으로 나눕니다. 시주는 한반도 경도에 맞춰 출생 시각을 보정한 뒤 정합니다. 음력 생일은 「음력 변환」 버튼으로 바꿀 수 있습니다(한국천문연구원 기준, 1900~2050년). 재미와 참고용이며, 건강·돈·법률 관련 결정은 전문가와 상의하세요.</p>
   </section>
   <!-- 궁합 -->
   <section id="vGung" class="view hidden">
@@ -483,6 +489,7 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 <div class="lbx hidden" id="lb" role="dialog" aria-label="카드 크게 보기"><div class="lb-card tilt" id="lbCard"></div><p class="lb-cap"><span id="lbCap"></span><small>아무 곳이나 누르면 닫힙니다</small></p></div>
 
 <script src="vendor/korean-lunar-calendar.min.js"></script>
+<script src="vendor/astronomy.browser.min.js"></script>
 <script>
 /* ============ 카드 데이터 ============ */
 // [이름, 영문, 정방향 키워드, 역방향 키워드, 정방향 해설, 역방향 해설]
@@ -871,6 +878,8 @@ document.addEventListener('keydown',e=>{
 /* 업데이트 소식 */
 const UPDATES=[
  {d:'2026-11-12',items:[
+  ['사주 여덟 글자를 모두 채웠습니다','월주를 넣었고, 띠도 2월 4일이 아닌 그해 입춘 시각으로 나눕니다. 절기 시각은 한국천문연구원 자료와 1분 이내로 맞춰 봤습니다.'],
+  ['궁합에 파(破)를 넣었습니다','출처를 확인해 다시 넣었고, 가장 약한 관계라 「약한 주의」로 따로 표시합니다.'],
   ['궁합 탭을 열었습니다','두 사람의 일간·일지·띠 관계와 오행 보완을 근거와 함께 봅니다. 판정에 쓴 규칙표도 공개했습니다.'],
   ['사주 풀이에 근거를 보여 줍니다','풀이마다 계산 과정을 「근거」로 붙이고, 「계산 · 해석 · 민속」 꼬리표로 사실과 해석을 나눴습니다.'],
   ['사주 요약 표를 넣었습니다','일간, 일지, 지장간, 십신, 12운성, 띠를 한 표로 봅니다.'],
@@ -882,7 +891,7 @@ const UPDATES=[
   ['「다음 카드」 버튼 오류를 고쳤습니다','해설 창의 버튼이 눌리지 않던 문제입니다. 탭을 바꾸면 열린 창도 닫힙니다.'],
   ['별자리 운세실을 처음 공개했습니다','타로(1장 · 3장 · 10장 배열), 카드 사전 78장, 사주 풀이를 담았습니다.']]}
 ];
-const SOON=[['사주 월주 · 대운','절기를 계산해 사주 여덟 글자를 모두 채우고, 10년 단위 대운을 보여 줄 예정입니다.'],['오행 분포','여덟 글자의 나무 · 불 · 흙 · 쇠 · 물 비율을 그래프로 보여 줄 예정입니다.']];
+const SOON=[['대운','10년 단위 대운을 보여 줄 예정입니다.'],['내 사주 오행 분포','사주 화면에서도 여덟 글자의 나무 · 불 · 흙 · 쇠 · 물 비율을 그래프로 보여 줄 예정입니다.']];
 function fmtD(d){const [y,m,dd]=d.split('-').map(Number);return `${y}년 ${m}월 ${dd}일`;}
 function newsHTML(){
   return `<div class="upd"><h2>업데이트 소식</h2><p class="lead2">별자리 운세실이 바뀐 내용입니다.</p>
@@ -987,16 +996,38 @@ function readKo(w){const c=w.slice(-1);let i=GAN.indexOf(c);if(i>=0)return GAN_K
 function jo(w,a,b){const c=readKo(w).charCodeAt(0);if(c<0xAC00||c>0xD7A3)return w+a;return w+((c-0xAC00)%28?a:b);}
 
 function tzCorr(y,m,d){const v=y*10000+m*100+d;if(v<19120101)return 0;if(v<19540321)return 30;if(v<19610810)return 0;return 30;}
+/* 24절기: astronomy-engine(VSOP87)으로 태양 황경이 15도 배수가 되는 순간을 구함.
+   한국천문연구원 달력자료 2021·2024·2026·2028년 절기 96개와 대조해 모두 1분 이내 일치(2026-11-12 확인). */
+const JEOL=[[285,'소한',1],[315,'입춘',2],[345,'경칩',3],[15,'청명',4],[45,'입하',5],[75,'망종',6],[105,'소서',7],[135,'입추',8],[165,'백로',9],[195,'한로',10],[225,'입동',11],[255,'대설',0]];
+const JEOL_CACHE={};
+function jeolOf(year){
+  if(!JEOL_CACHE[year])JEOL_CACHE[year]=JEOL.map(([a,n,b])=>{const g=Date.UTC(year,2,20,12)+((a>=280?a-360:a)/360)*365.2422*864e5;const t=Astronomy.SearchSunLongitude(a,new Date(g-6*864e5),12);return {t:t.date.getTime(),n,b};}).sort((x,y)=>x.t-y.t);
+  return JEOL_CACHE[year];
+}
+function kst(ms){const d=new Date(ms+9*3600e3);return {y:d.getUTCFullYear(),m:d.getUTCMonth()+1,d:d.getUTCDate(),hh:d.getUTCHours(),mm:d.getUTCMinutes()};}
+function fmtJeol(ms){const k=kst(Math.round(ms/60000)*60000);return `${k.y}년 ${k.m}월 ${k.d}일 ${pad2(k.hh)}:${pad2(k.mm)}`;}
 function calcSaju(ds,ts,noTime,dst){
   const [y,m,d]=ds.split('-').map(Number);
   let mins=null,off=0,corr=0;
   if(!noTime){const [hh,mm]=ts.split(':').map(Number);mins=hh*60+mm;corr=tzCorr(y,m,d)+(dst?60:0);mins-=corr;if(mins<0){mins+=1440;off=-1;}if(mins>=1380)off+=1;}
   const jdn=Math.floor(Date.UTC(y,m-1,d)/864e5)+2440588+off;
   const di=((jdn+49)%60+60)%60,dg=di%10,db=di%12;
-  const yy=(m<2||(m===2&&d<4))?y-1:y,yi=((yy-4)%60+60)%60;
+  // 출생 순간(UTC): 표준시(UTC+9 또는 +8:30) + 서머타임
+  const utcOff=(tzCorr(y,m,d)===30?9:8.5)+(dst?1:0);
+  let clock=12*60;if(!noTime){const [hh,mm]=ts.split(':').map(Number);clock=hh*60+mm;}
+  const inst=Date.UTC(y,m-1,d)+clock*60000-utcOff*3600e3;
+  const list=[...jeolOf(y-1),...jeolOf(y),...jeolOf(y+1)];
+  let cur=null,next=null;for(const j of list){if(j.t<=inst)cur=j;else{next=j;break;}}
+  const ipchun=jeolOf(y).find(j=>j.n==='입춘').t,sy=inst>=ipchun?y:y-1,yi=((sy-4)%60+60)%60,yg=yi%10,yb=yi%12;
+  const mb=cur.b,mg=(((yg%5)*2+2)+((mb-2+12)%12))%10;
+  // 경계 출생 판정
+  let edge='';
+  const sameDay=t=>{const k=kst(t);return k.y===y&&k.m===m&&k.d===d;};
+  if(noTime){const j=[cur,next].find(x=>x&&sameDay(x.t));if(j)edge=`태어난 날 ${fmtJeol(j.t)}에 ${j.n}이 들어 있어, 태어난 시각에 따라 월주${j.n==='입춘'?'와 띠':''}가 달라집니다. 시각을 넣으면 정확해집니다.`;}
+  else{const near=[cur,next].filter(Boolean).map(x=>({x,dm:Math.abs(inst-x.t)/60000})).sort((a,b)=>a.dm-b.dm)[0];if(near&&near.dm<30)edge=`출생 시각이 ${near.x.n} 절입 시각(${fmtJeol(near.x.t)})과 ${Math.round(near.dm)}분 차이라, 시각이 조금만 달라도 월주${near.x.n==='입춘'?'와 띠':''}가 바뀝니다.`;}
   let hg=null,hb=null;
   if(mins!==null){hb=Math.floor((mins+60)/120)%12;hg=((dg%5)*2+hb)%10;}
-  return {y,m,d,dg,db,yg:yi%10,yb:yi%12,hg,hb,mins,corr,edge:m===2&&d>=3&&d<=5};
+  return {y,m,d,dg,db,yg,yb,mg,mb,hg,hb,mins,corr,jeol:cur,nextJeol:next,edge,noTime};
 }
 const pad2=n=>String(n).padStart(2,'0');
 function pillar(label,g,b,me){
@@ -1014,7 +1045,8 @@ function renderSaju(){
   const g=r.dg,b=r.db,gi=GAN_INFO[g],key=GAN[g]+JI[b];
   const hid=JI_MAIN[b],ss=sipsin(g,hid),si=SS_INFO[ss],st=stage(g,b);
   const ySs=sipsin(g,2),yBss=sipsin(g,3),yst=stage(g,6);
-  let h=`<div class="pillars">${pillar('시주',r.hg,r.hb)}${pillar('일주 (나)',g,b,true)}${pillar('년주',r.yg,r.yb)}</div>`;
+  let h=`<div class="pillars">${pillar('시주',r.hg,r.hb)}${pillar('일주 (나)',g,b,true)}${pillar('월주',r.mg,r.mb)}${pillar('년주',r.yg,r.yb)}</div>`;
+  if(r.edge)h+=`<p class="corr warn2">⚠ ${r.edge}</p>`;
   if(!noTime)h+=`<p class="corr">출생 시각 ${$('bTime').value} → 보정 ${pad2(Math.floor(r.mins/60))}:${pad2(r.mins%60)} (${r.corr}분 뺌)</p>`;
 
   // 1. 원국 요약 (계산)
@@ -1024,8 +1056,10 @@ function renderSaju(){
       <tr><th>일지</th><td>${JI[b]} ${JI_KO[b]} · 지장간 정기 ${GAN[hid]}</td></tr>
       <tr><th>일지 십신</th><td>${ss} <span class="dim">(${si.def})</span></td></tr>
       <tr><th>일간의 12운성</th><td>${STAGES[st]} <span class="dim">(${jo(GAN[g],'이','가')} ${JI[b]}에 있을 때)</span></td></tr>
-      <tr><th>띠</th><td>${ANIMAL[r.yb]}띠 · ${GAN[r.yg]}${JI[r.yb]}년</td></tr>
-    </tbody></table></div>`;
+      <tr><th>월주</th><td>${GAN[r.mg]}${JI[r.mb]} ${GAN_KO[r.mg]}${JI_KO[r.mb]}월 <span class="dim">(${r.jeol.n} ${fmtJeol(r.jeol.t)} 이후 출생)</span></td></tr>
+      <tr><th>띠</th><td>${ANIMAL[r.yb]}띠 · ${GAN[r.yg]}${JI[r.yb]}년 <span class="dim">(입춘 시각 기준)</span></td></tr>
+    </tbody></table>
+    ${basis(`월주는 태어난 순간 바로 앞의 절기(節)로 월지를 정하고, 년간에 따라 월간을 정합니다(갑·기년은 병인월부터). 절기 시각은 천문 계산(astronomy-engine)으로 구하며, 한국천문연구원 달력자료의 절기 96개와 1분 이내로 일치함을 확인했습니다.`)}</div>`;
 
   // 2. 일간
   h+=`<div class="sj"><h3>${tag('i')}나의 일간 · ${GAN[g]} ${gi.nm}<small>${gi.img}</small></h3>
@@ -1053,14 +1087,14 @@ function renderSaju(){
   // 5. 띠
   h+=`<div class="sj"><h3>${tag('m')}${ANIMAL[r.yb]}띠<small>${JI[r.yb]} ${JI_KO[r.yb]}</small></h3><p>${ANIMAL[r.yb]}띠는 ${DDI_TXT[r.yb]}</p>
     <p class="dim">띠 성격은 민속적으로 전해지는 이야기이며, 명리학에서는 일간과 일주를 더 중요하게 봅니다.</p>
-    ${r.edge?'<p class="warn">입춘(2월 4일 무렵) 전에 태어났다면 앞 해의 띠입니다. 2월 3~5일생은 출생 시각과 그해 입춘 시각을 견줘야 정확합니다.</p>':''}</div>`;
+    </div>`;
 
   // 6. 해석 방식
   h+=`<div class="sj how"><h3>이 풀이는 이렇게 만들었습니다</h3>
-    <ol><li><b>계산</b> · 생년월일과 시각으로 일주·시주·년주 글자를 구합니다. 일주는 한국천문연구원 기준 달력과 대조해 검증했습니다.</li>
+    <ol><li><b>계산</b> · 생년월일과 시각으로 년주·월주·일주·시주 여덟 글자를 구합니다. 일주는 한국천문연구원 기준 달력과, 월주의 절기 시각은 한국천문연구원 절기 자료와 대조해 검증했습니다.</li>
     <li><b>이론</b> · 글자 사이의 관계를 명리학 기초 이론(오행 상생·상극, 십신, 12운성, 합·충·형·해·파)의 정의로 판단합니다.</li>
     <li><b>문장</b> · 그 정의를 쉬운 말로 풀어 씁니다. 고전 원문 인용이 아니며, 같은 사주라도 해석하는 사람마다 풀이가 다릅니다.</li></ol>
-    <p class="dim">아직 월주·대운·오행 분포는 넣지 않았습니다. 사주 풀이는 과학적으로 검증된 예측이 아니며, 재미와 자기 성찰을 위한 참고로 봐 주세요.</p></div>`;
+    <p class="dim">아직 대운은 넣지 않았습니다. 사주 풀이는 과학적으로 검증된 예측이 아니며, 재미와 자기 성찰을 위한 참고로 봐 주세요.</p></div>`;
   $('sajuOut').innerHTML=h;
 }
 $('goSaju').onclick=renderSaju;
@@ -1100,6 +1134,7 @@ const J_CHUNG=[[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]];
 const J_HYUNG=[[2,5],[5,8],[2,8],[1,10],[10,7],[1,7],[0,3]]; // 寅巳 巳申 寅申 丑戌 戌未 丑未 子卯
 const J_SELF=[4,6,9,11];                                 // 辰 午 酉 亥 자형
 const J_HAE=[[0,7],[1,6],[2,5],[3,4],[8,11],[9,10]];
+const J_PA=[[0,9],[6,3],[8,5],[2,11],[4,1],[10,7]];      // 子酉 午卯 申巳 寅亥 辰丑 戌未 (가장 약한 관계)
 const J_WONJIN=[[0,7],[1,6],[2,9],[3,8],[4,11],[5,10]];
 const subj=w=>w==='나'?'내가':w==='저'?'제가':jo(w,'이','가');
 const has=(list,a,b)=>list.some(p=>(p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a));
@@ -1132,12 +1167,13 @@ function branchRel(a,b,who){ // who: '일지' 또는 '띠'
   if(has(J_CHUNG,a,b))out.push({k:'c',n:`충 ${p}`,t:`${who}가 충(沖)입니다. 가까이 지낼수록 생활 방식이 부딪히기 쉬워, 각자의 공간과 시간을 존중하는 것이 좋다고 봅니다.`});
   if(has(J_HYUNG,a,b))out.push({k:'c',n:`형 ${p}`,t:`${who}가 형(刑)입니다. 서로를 바로잡으려다 상처를 주기 쉬운 관계로 봅니다.`});
   if(has(J_HAE,a,b))out.push({k:'c',n:`해 ${p}`,t:`${who}가 해(害)입니다. 작은 서운함이 쌓이기 쉬워, 그때그때 풀어 주는 것이 좋다고 봅니다.`});
+  if(has(J_PA,a,b))out.push({k:'w',n:`파 ${p}`,t:`${who}가 파(破)입니다. 약속이나 계획이 조금씩 어긋나기 쉽다고 봅니다. 여러 관계 가운데 가장 약한 작용으로 봅니다.`});
   if(has(J_WONJIN,a,b))out.push({k:'c',n:`원진 ${p}`,t:`${who}가 원진(怨嗔)입니다. 까닭 없이 서운한 감정이 생기기 쉽다고 전해져, 말투를 부드럽게 하는 것이 좋다고 봅니다.`});
   if(!out.length)out.push({k:'n',n:'특별한 관계 없음',t:`${who} 사이에 합이나 충 같은 특별한 관계가 없습니다. 무난한 관계로 봅니다.`});
   return out;
 }
 const SS_ROLE={'비견':'친구처럼 대등한 존재','겁재':'경쟁하며 자극을 주는 존재','식신':'편하게 챙겨 주고 싶은 존재','상관':'표현하고 싶어지는, 때로는 말이 앞서는 존재','편재':'활기와 새로움을 주는 존재','정재':'안정적으로 함께 꾸려 가는 존재','편관':'긴장과 끌림을 함께 주는 존재','정관':'믿고 기댈 수 있는, 기준이 되는 존재','편인':'독특한 시각으로 영감을 주는 존재','정인':'보살피고 도와주는 존재'};
-function elCount(r){const c=[0,0,0,0,0];[r.yg,r.dg,r.hg].forEach(g=>{if(g!==null)c[GAN_EL[g]]++;});[r.yb,r.db,r.hb].forEach(b=>{if(b!==null)c[JI_EL[b]]++;});return c;}
+function elCount(r){const c=[0,0,0,0,0];[r.yg,r.mg,r.dg,r.hg].forEach(g=>{if(g!==null)c[GAN_EL[g]]++;});[r.yb,r.mb,r.db,r.hb].forEach(b=>{if(b!==null)c[JI_EL[b]]++;});return c;}
 
 /* 입력 */
 function personForm(id,label){
@@ -1160,8 +1196,8 @@ function readPerson(id){
 }
 
 /* 결과 */
-function relList(list){return `<ul class="rels">${list.map(x=>`<li class="${x.k}"><span class="rk">${x.k==='g'?'조화':x.k==='c'?'주의':'보통'}</span><div><b>${x.n}</b>${x.t}</div></li>`).join('')}</ul>`;}
-function miniPillars(p){const r=p.r;return `<div class="mini-p"><b>${esc(p.name)}</b><span>${GAN[r.dg]}${JI[r.db]}일주 · ${ANIMAL[r.yb]}띠${r.hg!==null?` · ${GAN[r.hg]}${JI[r.hb]}시`:''}</span><small>${p.lunar?`${p.src} → 양력 ${p.ds}`:`양력 ${p.ds}`}</small></div>`;}
+function relList(list){return `<ul class="rels">${list.map(x=>`<li class="${x.k}"><span class="rk">${x.k==='g'?'조화':x.k==='c'?'주의':x.k==='w'?'약한 주의':'보통'}</span><div><b>${x.n}</b>${x.t}</div></li>`).join('')}</ul>`;}
+function miniPillars(p){const r=p.r;return `<div class="mini-p"><b>${esc(p.name)}</b><span>${GAN[r.yg]}${JI[r.yb]}년 ${GAN[r.mg]}${JI[r.mb]}월 ${GAN[r.dg]}${JI[r.db]}일${r.hg!==null?` ${GAN[r.hg]}${JI[r.hb]}시`:''}</span><small>${p.lunar?`${p.src} → 양력 ${p.ds}`:`양력 ${p.ds}`}</small>${r.edge?`<small class="warn2">⚠ 절기 경계 출생: ${r.edge}</small>`:''}</div>`;}
 function renderGung(){
   const A=readPerson('ga'),B=readPerson('gb');
   if(A.err||B.err){$('gungOut').innerHTML=`<p class="empty err">${A.err||B.err}</p>`;return;}
@@ -1178,7 +1214,7 @@ function renderGung(){
   h+=`<div class="sj"><h3>${tag('i')}일간 궁합<small>본바탕이 맞는지 · ${GAN[a.dg]} ${GAN_INFO[a.dg].nm} × ${GAN[b.dg]} ${GAN_INFO[b.dg].nm}</small></h3>${relList(sRel)}
     ${basis(`${An}의 일간 ${jo(GAN[a.dg],'은','는')} ${elYY(a.dg)}, ${Bn}의 일간 ${jo(GAN[b.dg],'은','는')} ${elYY(b.dg)}입니다. 천간합(甲己·乙庚·丙辛·丁壬·戊癸), 천간충(甲庚·乙辛·丙壬·丁癸), 오행 상생·상극으로 판단했습니다.`)}</div>`;
   h+=`<div class="sj"><h3>${tag('i')}일지 궁합<small>속마음과 생활 · ${JI[a.db]} × ${JI[b.db]}</small></h3>${relList(jRel)}
-    ${basis(`일지는 전통적으로 배우자 자리로 봅니다. ${An}의 일지는 ${JI[a.db]}, ${Bn}의 일지는 ${JI[b.db]}이며, 육합·삼합·충·형·해·원진 규칙으로 판단했습니다.`)}</div>`;
+    ${basis(`일지는 전통적으로 배우자 자리로 봅니다. ${An}의 일지는 ${JI[a.db]}, ${Bn}의 일지는 ${JI[b.db]}이며, 육합·삼합·충·형·해·원진·파 규칙으로 판단했습니다.`)}</div>`;
   h+=`<div class="sj"><h3>${tag('i')}서로에게 어떤 별인가<small>십신으로 본 관계</small></h3>
     <p>${An}에게 ${Bn}의 일간은 <b>${ssAB}</b>입니다. ${SS_ROLE[ssAB]}로 봅니다.</p>
     <p>${Bn}에게 ${An}의 일간은 <b>${ssBA}</b>입니다. ${SS_ROLE[ssBA]}로 봅니다.</p>
@@ -1187,12 +1223,12 @@ function renderGung(){
     <div class="elgrid"><span></span><span class="who">${An}</span><span class="who">${Bn}</span>
     ${[0,1,2,3,4].map(e=>`<span class="eln">${EL_KO[e]} ${EL_ZH[e]}</span><span class="bar"><i style="width:${ca[e]/mx*100}%"></i><em>${ca[e]}</em></span><span class="bar b"><i style="width:${cb[e]/mx*100}%"></i><em>${cb[e]}</em></span>`).join('')}</div>
     ${fills.length?fills.map(t=>`<p>✓ ${t}</p>`).join(''):'<p>한쪽에 없는 오행을 다른 쪽이 채워 주는 관계는 없습니다.</p>'}
-    <p class="dim">월주가 아직 없어 년주·일주·시주 글자만 셌습니다(시각을 모르면 4글자). 여덟 글자 전체로 보면 결과가 달라집니다.</p></div>`;
+    <p class="dim">여덟 글자를 모두 셌습니다. 태어난 시각을 모르면 시주를 빼고 여섯 글자로 셉니다.</p></div>`;
   h+=`<div class="sj"><h3>${tag('m')}띠 궁합 (겉궁합)<small>${ANIMAL[a.yb]}띠 × ${ANIMAL[b.yb]}띠</small></h3>${relList(tRel)}
     <p class="dim">띠만 보는 겉궁합은 민속적으로 널리 쓰이지만, 명리학에서는 일간·일지를 보는 속궁합을 더 중요하게 봅니다.</p></div>`;
   h+=`<div class="sj how"><h3>이 궁합은 이렇게 봤습니다</h3><ol>
     <li><b>계산</b> · 두 사람의 생년월일과 시각으로 사주 글자를 구합니다. 음력은 한국천문연구원 기준으로 양력으로 바꿉니다.</li>
-    <li><b>비교</b> · 일간끼리, 일지끼리, 띠끼리 명리학 기초 이론의 합·충·형·해·원진과 오행 상생·상극 규칙으로 따집니다.</li>
+    <li><b>비교</b> · 일간끼리, 일지끼리, 띠끼리 명리학 기초 이론의 합·충·형·해·원진·파와 오행 상생·상극 규칙으로 따집니다. 파는 가장 약한 관계라 주의 개수에 넣지 않습니다.</li>
     <li><b>문장</b> · 각 관계의 전통적 의미를 쉬운 말로 풀어 씁니다. 점수는 매기지 않습니다.</li></ol>
     <details class="rules"><summary>판정에 쓴 규칙표 보기</summary><table class="facts"><tbody>
       <tr><th>천간합</th><td>甲己 · 乙庚 · 丙辛 · 丁壬 · 戊癸</td></tr>
@@ -1203,8 +1239,9 @@ function renderGung(){
       <tr><th>형</th><td>寅巳申 · 丑戌未 · 子卯, 자형 辰辰 · 午午 · 酉酉 · 亥亥</td></tr>
       <tr><th>해</th><td>子未 · 丑午 · 寅巳 · 卯辰 · 申亥 · 酉戌</td></tr>
       <tr><th>원진</th><td>子未 · 丑午 · 寅酉 · 卯申 · 辰亥 · 巳戌</td></tr>
+      <tr><th>파</th><td>子酉 · 午卯 · 申巳 · 寅亥 · 辰丑 · 戌未 <span class="dim">(가장 약한 관계, 주의 개수에서 제외)</span></td></tr>
       <tr><th>오행</th><td>상생 나무→불→흙→쇠→물→나무, 상극 나무→흙→물→불→쇠→나무</td></tr>
-    </tbody></table><p class="dim">각 짝은 명리학 기초 자료 여러 곳에서 같은 내용으로 확인했습니다. 파(破)는 자료마다 짝이 달라 넣지 않았습니다.</p></details>
+    </tbody></table><p class="dim">각 짝은 명리학 기초 자료 여러 곳에서 같은 내용으로 확인했습니다. 파(破)는 영어권 명리 해설 자료에서 여섯 짝을 모두 확인했고, 다른 자료에서 일부를 함께 확인했습니다.</p></details>
     <p class="dim">궁합은 두 사람의 관계를 돌아보는 재미와 참고용입니다. 관계의 좋고 나쁨은 두 사람이 함께 만들어 갑니다.</p></div>`;
   $('gungOut').innerHTML=h;
   $('gungOut').scrollIntoView({behavior:'smooth',block:'start'});

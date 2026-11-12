@@ -13,3 +13,4 @@
 ## 사용한 공개 라이브러리
 
 - [korean-lunar-calendar](https://github.com/usingsky/korean_lunar_calendar_js) v0.4.0 (MIT) — 음력→양력 변환, 한국천문연구원 기준. 라이선스: `vendor/korean-lunar-calendar.LICENSE`
+- [astronomy-engine](https://github.com/cosinekitty/astronomy) v2.1.19 (MIT) — 24절기 시각 계산(월주·입춘). 한국천문연구원 달력자료 2021·2024·2026·2028년 절기 96개와 1분 이내 일치 확인. 라이선스: `vendor/astronomy-engine.LICENSE`
