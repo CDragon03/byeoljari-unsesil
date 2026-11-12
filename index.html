@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;letter-spacing:inherit}
 .seg button{border:0;background:none;padding:6px 16px;border-radius:8px;font-size:14.5px;font-weight:600;color:var(--text-2);cursor:pointer;transition:background .25s var(--ease),color .25s}
 .seg button.on{background:var(--surface-3);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.35)}
 
-main{max-width:1200px;margin:0 auto;padding:0 20px 40px}
+main{position:relative;z-index:1;isolation:isolate;max-width:1200px;margin:0 auto;padding:0 20px 40px}
 section.view{animation:fade .5s var(--ease)}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
@@ -125,7 +125,7 @@ select.input{appearance:none;-webkit-appearance:none;background-image:linear-gra
 .slotsbar{display:flex;justify-content:center;gap:8px;margin:18px 0 6px;flex-wrap:wrap}
 .slotsbar i{width:30px;aspect-ratio:2/3;border-radius:5px;border:1.5px dashed var(--surface-3);transition:.3s}
 .slotsbar i.f{border:0;background:url(cards/card_back.webp) center/cover;box-shadow:0 0 0 1.5px var(--gold);transform:translateY(-2px)}
-.deck{position:relative;max-width:1000px;margin:20px auto 0}
+.deck{isolation:isolate;position:relative;max-width:1000px;margin:20px auto 0}
 .deck .cb{position:absolute;left:0;top:0;aspect-ratio:2/3;border-radius:7px;overflow:hidden;cursor:pointer;transform:var(--t);transform-origin:50% 100%;
   box-shadow:-4px 4px 12px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.1);transition:transform .25s var(--ease),opacity .35s,box-shadow .25s}
 .deck .cb img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
@@ -889,6 +889,7 @@ document.addEventListener('keydown',e=>{
 /* 업데이트 소식 */
 const UPDATES=[
  {d:'2026-11-12',items:[
+  ['카드가 창 위로 겹쳐 보이던 문제를 고쳤습니다','카드를 고르는 중에 창을 열면 펼친 카드가 창 위로 올라오던 문제입니다.'],
   ['상단 탭이 안 보이던 문제를 고쳤습니다','궁합 오행 그래프의 이름이 상단 바와 겹쳐 탭이 가려지던 문제입니다.'],
   ['대운을 넣었습니다','성별을 고르면 10년 단위 대운 10개와 지금 대운의 풀이가 나옵니다. 계산 과정은 근거 칸에 그대로 보여 줍니다.'],
   ['음력 생일을 바로 넣을 수 있습니다','생년월일 칸에서 「음력」을 고르면 입력하는 즉시 양력으로 바뀝니다.'],
