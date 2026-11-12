@@ -364,10 +364,10 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 .elgrid{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px 12px;align-items:center;margin-bottom:14px}
 .elgrid .who{font-size:14px;font-weight:700;color:var(--text-2)}
 .eln{font-size:15px;font-weight:600;white-space:nowrap}
-.bar{position:relative;height:22px;background:var(--surface-2);border-radius:6px;overflow:hidden}
-.bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#b8923f,var(--gold));border-radius:6px}
-.bar.b i{background:linear-gradient(90deg,#3c7fb0,#6fb7da)}
-.bar em{position:absolute;right:8px;top:0;line-height:22px;font-style:normal;font-size:13px;font-weight:700}
+.elbar{position:relative;height:22px;background:var(--surface-2);border-radius:6px;overflow:hidden}
+.elbar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#b8923f,var(--gold));border-radius:6px}
+.elbar.b i{background:linear-gradient(90deg,#3c7fb0,#6fb7da)}
+.elbar em{position:absolute;right:8px;top:0;line-height:22px;font-style:normal;font-size:13px;font-weight:700}
 .rules{margin-top:14px;border-top:1px solid var(--sep);padding-top:12px}
 .rules summary{cursor:pointer;font-size:15px;font-weight:600;color:var(--gold-hi)}
 .rules .facts{margin-top:10px;font-size:15px}
@@ -889,6 +889,7 @@ document.addEventListener('keydown',e=>{
 /* 업데이트 소식 */
 const UPDATES=[
  {d:'2026-11-12',items:[
+  ['상단 탭이 안 보이던 문제를 고쳤습니다','궁합 오행 그래프의 이름이 상단 바와 겹쳐 탭이 가려지던 문제입니다.'],
   ['대운을 넣었습니다','성별을 고르면 10년 단위 대운 10개와 지금 대운의 풀이가 나옵니다. 계산 과정은 근거 칸에 그대로 보여 줍니다.'],
   ['음력 생일을 바로 넣을 수 있습니다','생년월일 칸에서 「음력」을 고르면 입력하는 즉시 양력으로 바뀝니다.'],
   ['사주 여덟 글자를 모두 채웠습니다','월주를 넣었고, 띠도 2월 4일이 아닌 그해 입춘 시각으로 나눕니다. 절기 시각은 한국천문연구원 자료와 1분 이내로 맞춰 봤습니다.'],
@@ -1262,7 +1263,7 @@ function renderGung(){
     ${basis(`${GAN[a.dg]}에서 보면 ${jo(GAN[b.dg],'은','는')} ${ssAB}(${SS_INFO[ssAB].def}), ${GAN[b.dg]}에서 보면 ${jo(GAN[a.dg],'은','는')} ${ssBA}(${SS_INFO[ssBA].def})입니다. 전통적으로 남성에게는 재성(정재·편재), 여성에게는 관성(정관·편관)을 배우자의 별로 봅니다.`)}</div>`;
   h+=`<div class="sj"><h3>${tag('i')}오행 보완<small>${na}글자 · ${nb}글자 기준</small></h3>
     <div class="elgrid"><span></span><span class="who">${An}</span><span class="who">${Bn}</span>
-    ${[0,1,2,3,4].map(e=>`<span class="eln">${EL_KO[e]} ${EL_ZH[e]}</span><span class="bar"><i style="width:${ca[e]/mx*100}%"></i><em>${ca[e]}</em></span><span class="bar b"><i style="width:${cb[e]/mx*100}%"></i><em>${cb[e]}</em></span>`).join('')}</div>
+    ${[0,1,2,3,4].map(e=>`<span class="eln">${EL_KO[e]} ${EL_ZH[e]}</span><span class="elbar"><i style="width:${ca[e]/mx*100}%"></i><em>${ca[e]}</em></span><span class="elbar b"><i style="width:${cb[e]/mx*100}%"></i><em>${cb[e]}</em></span>`).join('')}</div>
     ${fills.length?fills.map(t=>`<p>✓ ${t}</p>`).join(''):'<p>한쪽에 없는 오행을 다른 쪽이 채워 주는 관계는 없습니다.</p>'}
     <p class="dim">여덟 글자를 모두 셌습니다. 태어난 시각을 모르면 시주를 빼고 여섯 글자로 셉니다.</p></div>`;
   h+=`<div class="sj"><h3>${tag('m')}띠 궁합 (겉궁합)<small>${ANIMAL[a.yb]}띠 × ${ANIMAL[b.yb]}띠</small></h3>${relList(tRel)}
