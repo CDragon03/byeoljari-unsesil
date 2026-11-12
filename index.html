@@ -311,11 +311,30 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
 .how ol{margin:0 0 12px;padding-left:20px;font-size:16px;line-height:1.7}
 .how li{margin-bottom:6px}
 .how .dim{font-size:14.5px}
+.brand{display:flex;align-items:center;gap:12px}
+.news{position:relative;border:0;background:var(--surface);color:var(--text-2);font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.news:hover{background:var(--surface-2);color:var(--text)}
+.news .dot{position:absolute;top:1px;right:1px;width:8px;height:8px;border-radius:50%;background:var(--rev);box-shadow:0 0 0 2px #000}
+.flink{border:0;background:none;padding:0;color:var(--gold-hi);font-size:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.upd h2{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:0 0 6px}
+.upd .lead2{font-size:15.5px;color:var(--text-2);margin:0 0 26px}
+.upd-day{position:relative;padding:0 0 22px 22px;border-left:2px solid var(--surface-3);margin-left:6px}
+.upd-day:last-child{padding-bottom:0}
+.upd-day::before{content:'';position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface-3)}
+.upd-day.new::before{background:var(--gold)}
+.upd-day.soon{border-left-style:dashed}
+.upd-d{font-size:15px;font-weight:700;color:var(--gold-hi);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.upd-d em{font-style:normal;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(226,184,102,.16);color:var(--gold-hi)}
+.upd-day.soon .upd-d{color:var(--text-2)}
+.upd ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.upd li{background:var(--surface-2);border-radius:12px;padding:12px 14px;font-size:15.5px;line-height:1.6}
+.upd li b{display:block;font-size:15px;margin-bottom:2px}
+@media (max-width:640px){.brand{justify-content:space-between}.upd h2{font-size:26px}}
 </style>
 </head>
 <body>
 <header class="bar"><div class="bar-in">
-  <button class="logo" id="home" aria-label="처음으로"><svg viewBox="0 0 24 24" fill="none" stroke="#e2b866" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.5l2.4 6.1 6.6.4-5.1 4.2 1.7 6.4L12 16l-5.6 3.6 1.7-6.4L3 9l6.6-.4z"/></svg>별자리 운세실</button>
+  <div class="brand"><button class="logo" id="home" aria-label="처음으로"><svg viewBox="0 0 24 24" fill="none" stroke="#e2b866" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2.5l2.4 6.1 6.6.4-5.1 4.2 1.7 6.4L12 16l-5.6 3.6 1.7-6.4L3 9l6.6-.4z"/></svg>별자리 운세실</button><button class="news" id="newsBtn" aria-label="업데이트 소식 보기">새 소식<i class="dot hidden" id="newsDot"></i></button></div>
   <nav class="seg" role="tablist">
     <button class="on" data-tab="tarot" role="tab">타로</button>
     <button data-tab="dict" role="tab">카드 사전</button>
@@ -400,7 +419,7 @@ footer{max-width:1200px;margin:0 auto;padding:32px 20px 48px;border-top:1px soli
   </section>
 </main>
 
-<footer><span>만든이: 최하용</span><span>재미와 자기 성찰을 위한 운세 서비스입니다.</span></footer>
+<footer><span>만든이: 최하용 · <button class="flink" id="newsLink">업데이트 소식</button></span><span>재미와 자기 성찰을 위한 운세 서비스입니다.</span></footer>
 
 <div class="scrim hidden" id="scrim"></div>
 <div class="sheet hidden" id="sheet" role="dialog" aria-modal="true">
@@ -796,6 +815,40 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){if(!$('lb').classList.contains('hidden'))closeLightbox();else if(SH)closeSheet();}
   if(SH&&SH.pos&&$('lb').classList.contains('hidden')){if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);}
 });
+
+
+/* 업데이트 소식 */
+const UPDATES=[
+ {d:'2026-11-12',items:[
+  ['사주 풀이에 근거를 보여 줍니다','풀이마다 계산 과정을 「근거」로 붙이고, 「계산 · 해석 · 민속」 꼬리표로 사실과 해석을 나눴습니다.'],
+  ['사주 요약 표를 넣었습니다','일간, 일지, 지장간, 십신, 12운성, 띠를 한 표로 봅니다.'],
+  ['문구를 다듬었습니다','화면 안내와 타로 해설 24곳을 더 읽기 쉽고 단호하게 고쳤습니다.'],
+  ['업데이트 소식 창을 만들었습니다','바뀐 내용을 이 창에서 날짜별로 봅니다.']]},
+ {d:'2026-11-06',items:[
+  ['음력 생일도 넣을 수 있습니다','사주 탭의 「음력 변환」 버튼이 음력 생일을 양력으로 바꿔 줍니다(한국천문연구원 기준, 1900~2050년).'],
+  ['해설 창을 크게 키웠습니다','카드 그림을 키우고, 이전·다음 버튼을 창 아래에 고정했습니다.'],
+  ['「다음 카드」 버튼 오류를 고쳤습니다','해설 창의 버튼이 눌리지 않던 문제입니다. 탭을 바꾸면 열린 창도 닫힙니다.'],
+  ['별자리 운세실을 처음 공개했습니다','타로(1장 · 3장 · 10장 배열), 카드 사전 78장, 사주 풀이를 담았습니다.']]}
+];
+const SOON=[['사주 월주 · 대운','절기를 계산해 사주 여덟 글자를 모두 채우고, 10년 단위 대운을 보여 줄 예정입니다.'],['오행 분포','여덟 글자의 나무 · 불 · 흙 · 쇠 · 물 비율을 그래프로 보여 줄 예정입니다.']];
+function fmtD(d){const [y,m,dd]=d.split('-').map(Number);return `${y}년 ${m}월 ${dd}일`;}
+function newsHTML(){
+  return `<div class="upd"><h2>업데이트 소식</h2><p class="lead2">별자리 운세실이 바뀐 내용입니다.</p>
+  <div class="upd-day soon"><p class="upd-d">준비 중</p><ul>${SOON.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join('')}</ul></div>
+  ${UPDATES.map((u,i)=>`<div class="upd-day${i===0?' new':''}"><p class="upd-d">${fmtD(u.d)}${i===0?'<em>최신</em>':''}</p><ul>${u.items.map(x=>`<li><b>${x[0]}</b>${x[1]}</li>`).join('')}</ul></div>`).join('')}</div>`;
+}
+const NEWS_KEY='byeoljari_news_seen';
+function newsSeen(){try{return localStorage.getItem(NEWS_KEY)===UPDATES[0].d;}catch(e){return true;}}
+function markNews(){try{localStorage.setItem(NEWS_KEY,UPDATES[0].d);}catch(e){}$('newsDot').classList.add('hidden');}
+function openNews(from){
+  SH={panel:true};const sh=$('sheet'),sc=$('scrim');
+  $('sheetBody').innerHTML=newsHTML();$('sheetFoot').classList.add('hidden');$('sheetFoot').innerHTML='';
+  sh.classList.remove('hidden');sc.classList.remove('hidden');document.body.classList.add('lock');
+  requestAnimationFrame(()=>{sh.classList.add('on');sc.classList.add('on');});
+  $('sheetBody').scrollTop=0;markNews();
+}
+$('newsBtn').onclick=()=>openNews();$('newsLink').onclick=()=>openNews();
+if(!newsSeen())$('newsDot').classList.remove('hidden');
 
 /* 카드 사전 */
 let F='all';
